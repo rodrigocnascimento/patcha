@@ -326,12 +326,12 @@ Registro completo de todas as ações — quem fez o quê, quando:
 
 | Componente | Tecnologia | Função |
 |---|---|---|
-| **Frontend** | React + TypeScript | Dashboard web, visualizações, configurações |
+| **Frontend** | Vuejs3 + TypeScript | Dashboard web, visualizações, configurações |
 | **Backend API** | Node.js + Fastify | REST API, autenticação, autorização, lógica de negócio |
 | **Workers** | Node.js + BullMQ | Execução de scans agendados, processamento assíncrono |
 | **Banco de dados** | PostgreSQL | Dados estruturados, histórico, audit logs |
 | **Cache/Filas** | Redis | Cache de resultados, filas de jobs, sessões |
-| **Storage** | S3/MinIO | Armazenamento de relatórios PDF, exports |
+| **Storage** | Cloudflare R2/MinIO | Armazenamento de relatórios PDF, exports |
 
 ### Relação com o Core Open-Source (Produto 1)
 
@@ -532,7 +532,7 @@ Empresas pagam para resolver problemas organizacionais: compliance, auditoria, g
 > **Pré-requisito**: O CLI (Produto 1) deve estar completo (Fases 1 e 2) antes de iniciar o Enterprise.
 
 ### Fase 1: MVP Enterprise (~3-4 semanas)
-- Dashboard web básico (React)
+- Dashboard web básico (Vuejs3)
 - Autenticação simples (email/senha)
 - Visualização de múltiplos projetos
 - Histórico de scans (30 dias)

@@ -158,12 +158,12 @@
 
 ### Técnico (Enterprise Específico)
 - Arquitetura separada:
-  - Frontend: React + TypeScript
+  - Frontend: Vuejs3 + TypeScript
   - Backend API: Node.js + Fastify
   - Workers: Node.js + BullMQ (para scans agendados)
   - Banco de dados: PostgreSQL (dados estruturados, histórico)
   - Cache/Filas: Redis
-  - Storage: S3/MinIO (para relatórios PDF, exports)
+  - Storage: Cloudflare R2/MinIO (para relatórios PDF, exports)
 - Autenticação:
   - Email/senha inicial
   - Preparação para SAML/OIDC (para SSO futuro)

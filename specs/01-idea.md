@@ -650,7 +650,7 @@ Após as Fases 1 e 2, o CLI estará completo como **Produto 1**. O **Produto 2 (
 O CLI busca configuração em ordem de prioridade:
 
 1. Argumentos de linha de comando
-2. Variáveis de ambiente (prefixo `CONFLICT_SOLVER_`)
+2. Variáveis de ambiente (prefixo `PATCHA_`)
 3. Arquivo `.patcha.yml` ou `.patcha.json` no projeto
 4. Arquivo `~/.config/patcha/config.yml` (global)
 
@@ -806,7 +806,7 @@ patcha/
 │   ├── integration/
 │   └── fixtures/                # package.json de teste
 │
-├── docs/
+├── specs/
 │   ├── 00-idea.md               # Este documento (CLI)
 │   ├── 01-analise-mercado.md    # Análise de potencial de negócio
 │   └── 03-plano-enterprise.md   # Plano do Produto 2 (Enterprise)
