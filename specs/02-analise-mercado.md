@@ -108,7 +108,7 @@ As ferramentas atuais resolvem apenas **60-70% dos casos** automaticamente:
  PREÇO   │            │                        │
          ├────────────┼────────────────────────┤
          │            │                        │
-   Baixo │ npm audit  │   CONFLICT SOLVER ★    │
+   Baixo │ npm audit  │   Patcha ★    │
          │ Renovate   │                        │
          │ Dependabot │                        │
          │            │                        │

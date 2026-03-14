@@ -88,7 +88,7 @@ Visão consolidada de todos os projetos da organização:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  CONFLICT SOLVER ENTERPRISE          Acme Corp    [João ▾]      │
+│  Patcha ENTERPRISE          Acme Corp    [João ▾]      │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐        │

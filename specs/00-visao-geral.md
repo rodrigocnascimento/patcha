@@ -37,7 +37,7 @@ Isse enxergamos isso em duas camadas inseparáveis:
 │                                                                  │
 │  ▼                                                              │
 │                                                                  │
-│  CONFLICT SOLVER CLI (Produto 1)                                 │
+│  Patcha CLI (Produto 1)                                 │
 │  → Open-source, gratuito                                         │
 │  → Resolve o problema técnico                                    │
 │  → É útil por si só                                              │
@@ -51,7 +51,7 @@ Isse enxergamos isso em duas camadas inseparáveis:
 │                                                                  │
 │  ▼                                                              │
 │                                                                  │
-│  CONFLICT SOLVER ENTERPRISE (Produto 2)                         │
+│  Patcha ENTERPRISE (Produto 2)                         │
 │  → Pago, plataforma web                                         │
 │  → Resolve o problema organizacional                            │
 │  → Gera valor recorrente                                        │
