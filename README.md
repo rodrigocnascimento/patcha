@@ -24,6 +24,9 @@
 <p align="center">
 
 <a href="#install">Install</a> • <a href="#usage">Usage</a> • <a href="#why-patcha">Why Patcha</a> • <a href="#how-it-works">How it works</a> • <a href="#roadmap">Roadmap</a>
+<span style="display:inline-block; width:1em"></span>
+| <span style="display:inline-block; width:1em"></span>
+<a href="#instalação">Instalação</a> • <a href="#uso">Uso</a> • <a href="#por-que-patcha">Por que Patcha</a> • <a href="#como-funciona">Como funciona</a>
 
 </p>
 
@@ -44,6 +47,21 @@ This delay can take **days or weeks**.
 
 ---
 
+## O Problema
+
+Projetos JavaScript modernos dependem de **centenas de dependências**.
+
+Quando uma vulnerabilidade aparece, desenvolvedores frequentemente precisam:
+
+• esperar pelos mantenedores
+• esperar por novos releases
+• lidar com cadeias de dependências aninhadas
+• enviar código com vulnerabilidades conhecidas
+
+Esse atraso pode levar **dias ou semanas**.
+
+---
+
 ## The Patcha Approach
 
 Patcha allows developers to **patch vulnerable dependencies immediately**.
@@ -57,6 +75,22 @@ Scan → Detect → Patch
 No forks.
 No waiting.
 No production risk.
+
+---
+
+## A Abordagem Patcha
+
+Patcha permite que desenvolvedores **corrigam dependências vulneráveis imediatamente**.
+
+Em vez de esperar por correções upstream, Patcha injeta patches direcionados diretamente na sua árvore de dependências.
+
+```
+Scan → Detect → Patch
+```
+
+Sem forks.
+Sem esperar.
+Sem risco em produção.
 
 ---
 
@@ -81,6 +115,27 @@ Summary
 
 ---
 
+## Exemplo
+
+```bash
+patcha scan
+```
+
+```
+🐼 Patcha escaneando dependências...
+
+✔ lodash corrigido
+✔ minimist corrigido
+⚠ axios requer revisão manual
+
+Resumo
+------
+2 vulnerabilidades corrigidas
+1 dependência requer atenção
+```
+
+---
+
 ## Install
 
 Install globally:
@@ -90,6 +145,22 @@ npm install -g patcha
 ```
 
 Or run it directly with `npx`:
+
+```bash
+npx patcha scan
+```
+
+---
+
+## Instalação
+
+Instale globalmente:
+
+```bash
+npm install -g patcha
+```
+
+Ou rode diretamente com `npx`:
 
 ```bash
 npx patcha scan
@@ -118,6 +189,36 @@ patcha verify
 ```
 
 Example workflow:
+
+```bash
+patcha scan
+patcha apply
+patcha verify
+```
+
+---
+
+## Uso
+
+### Escaneia dependências
+
+```bash
+patcha scan
+```
+
+### Aplica patches disponíveis
+
+```bash
+patcha apply
+```
+
+### Verifica dependências corrigidas
+
+```bash
+patcha verify
+```
+
+Exemplo de fluxo:
 
 ```bash
 patcha scan
@@ -167,6 +268,46 @@ This allows fixes without:
 
 ---
 
+## Como funciona
+
+Patcha opera em três etapas.
+
+### 1. Análise de Dependências
+
+Patcha analiza sua árvore de dependências usando:
+
+* `package-lock.json`
+* `pnpm-lock.yaml`
+* `yarn.lock`
+
+Isso constrói um grafo completo dos pacotes instalados.
+
+---
+
+### 2. Detecção de Vulnerabilidades
+
+Dependências são comparadas com um **registro de patches** contendo correções conhecidas de vulnerabilidades.
+
+Esse registro mapeia:
+
+```
+pacote → versão vulnerável → patch
+```
+
+---
+
+### 3. Injeção Segura de Patches
+
+Patcha aplica patches direcionados diretamente dentro do `node_modules`.
+
+Isso permite correções sem:
+
+• atualizar versões com breaking changes
+• fazer fork de repositórios
+• esperar pelos mantenedores
+
+---
+
 ## Why Patcha
 
 | Feature                       | Patcha | Traditional Fix |
@@ -177,6 +318,19 @@ This allows fixes without:
 | CI friendly                   | ✔      | ✔               |
 
 Patcha is designed for **real-world production workflows**.
+
+---
+
+## Por que Patcha
+
+| Recurso                       | Patcha | Correção Tradicional |
+| ----------------------------- | ------ | -------------------- |
+| Patch imediato                | ✔      | ✖                   |
+| Sem forks necessários         | ✔      | ✖                   |
+| Funciona com lockfiles        | ✔      | ✔                   |
+| Amigo do CI                   | ✔      | ✔                   |
+
+Patcha foi projetado para **fluxos de trabalho reais em produção**.
 
 ---
 
@@ -196,6 +350,22 @@ Example GitHub Actions step:
 
 ---
 
+## Uso em CI
+
+Patcha funciona bem em pipelines de CI.
+
+Exemplo de passo no GitHub Actions:
+
+```yaml
+- name: Escaneia dependências
+  run: npx patcha scan
+
+- name: Aplica patches
+  run: npx patcha apply
+```
+
+---
+
 ## Roadmap
 
 Planned features:
@@ -209,6 +379,19 @@ Planned features:
 
 ---
 
+## Roadmap
+
+Funcionalidades planejadas:
+
+* integração com banco de dados de vulnerabilidades
+* atualizações automáticas do registro de patches
+* suporte a workspaces / monorepos
+* modo de execução em CI
+* geração de relatórios de auditoria
+* integração com GitHub Security
+
+---
+
 ## Philosophy
 
 Patcha follows a simple principle:
@@ -216,6 +399,16 @@ Patcha follows a simple principle:
 > Security patches should not depend on release cycles.
 
 When a vulnerability appears, developers should be able to respond **immediately and safely**.
+
+---
+
+## Filosofia
+
+Patcha segue um princípio simples:
+
+> Patches de segurança não devem depender de ciclos de release.
+
+Quando uma vulnerabilidade aparece, desenvolvedores devem ser capazes de responder **imediatamente e com segurança**.
 
 ---
 
@@ -238,6 +431,25 @@ CONTRIBUTING.md
 
 ---
 
+## Contribuindo
+
+Contribuições são bem-vindas.
+
+Você pode ajudar:
+
+• enviando novos patches
+• reportando vulnerabilidades
+• melhorando regras de detecção
+• melhorando a documentação
+
+Veja:
+
+```
+CONTRIBUTING.md
+```
+
+---
+
 ## License
 
 MIT License
@@ -247,5 +459,7 @@ MIT License
 <p align="center">
 
 🐼 Patcha Panda protects your dependencies
+
+🐼 Patcha Panda protege suas dependências
 
 </p>
