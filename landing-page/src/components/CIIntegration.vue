@@ -25,28 +25,41 @@
           </ul>
         </div>
 
-        <div class="bg-gray-900 rounded-xl overflow-hidden">
-          <div class="bg-gray-800 px-4 py-2">
-            <span class="text-gray-400 text-sm font-mono">.github/workflows/security.yml</span>
+        <!-- Terminal Window -->
+        <div class="bg-gray-900 rounded-xl overflow-hidden shadow-2xl border border-gray-700">
+          <!-- Title bar -->
+          <div class="bg-gray-800 px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <!-- Window buttons -->
+              <div class="flex gap-1.5">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+              </div>
+              <span class="text-gray-400 text-sm font-mono ml-3">security.yml</span>
+            </div>
+            <span class="text-gray-500 text-xs">GitHub Actions</span>
           </div>
-          <div class="p-6 font-mono text-sm">
-            <pre class="text-gray-300">name: Security Scan
+          
+          <!-- Code content -->
+          <div class="p-4 font-mono text-sm overflow-x-auto">
+            <pre class="text-gray-300"><code><span class="text-purple-400">name</span>: <span class="text-green-400">Security Scan</span>
 
-on: [push, pull_request]
+<span class="text-purple-400">on</span>: [<span class="text-yellow-400">push</span>, <span class="text-yellow-400">pull_request</span>]
 
-jobs:
-  patcha:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run Patcha
-        run: |
+<span class="text-purple-400">jobs</span>:
+  <span class="text-blue-400">patcha</span>:
+    <span class="text-purple-400">runs-on</span>: <span class="text-green-400">ubuntu-latest</span>
+    <span class="text-purple-400">steps</span>:
+      - <span class="text-yellow-400">uses</span>: <span class="text-green-400">actions/checkout@v4</span>
+      - <span class="text-yellow-400">name</span>: <span class="text-green-400">Run Patcha</span>
+        <span class="text-purple-400">run</span>: |
           npm install -g patcha
           patcha scan --json > report.json
       
-      - name: Fail if vulnerabilities
-        if: failure()
-        run: exit 1</pre>
+      - <span class="text-yellow-400">name</span>: <span class="text-green-400">Fail if vulnerabilities</span>
+        <span class="text-purple-400">if</span>: <span class="text-yellow-400">failure()</span>
+        <span class="text-purple-400">run</span>: <span class="text-green-400">exit 1</span></code></pre>
           </div>
         </div>
       </div>
