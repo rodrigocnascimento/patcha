@@ -49,7 +49,7 @@ onMounted(() => {
               </a>
             </div>
             <div class="flex items-center gap-4">
-              <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-accent transition-colors">Docs</a>
+              <a href="https://docs.patcha.site" class="text-gray-600 dark:text-gray-300 hover:text-accent transition-colors">Docs</a>
               <a href="https://github.com/rodrigocnascimento/patcha" target="_blank" class="text-gray-600 dark:text-gray-300 hover:text-accent transition-colors">GitHub</a>
               <button 
                 @click="toggleDarkMode"

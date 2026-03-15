@@ -1114,6 +1114,34 @@ Whenever a task is assigned, you **MUST NOT** generate implementation code immed
 * **Pre-emptive Debugging:** Forces a check for Go/TypeScript safety before a single line of logic is written.
 * **Audit Trail:** Every TDD becomes a permanent `.md` file in your repository.
 
+## rules/55-mermaid-only-graphs.md
+
+# Rule: Mermaid-Only Diagrams
+
+## Context
+
+To ensure consistent, renderable documentation diagrams, all graphs must be authored in Mermaid.
+ASCII diagrams are not allowed.
+
+## The Protocol
+
+- Use Mermaid for any diagram or graph.
+- Do not create ASCII art diagrams.
+
+## Example (Allowed)
+
+```mermaid
+flowchart LR
+  A[Input] --> B[Process]
+  B --> C[Output]
+```
+
+## Example (Forbidden)
+
+```
+A --> B --> C
+```
+
 ## rules/60-migration-entity.md
 
 # Rule: Entity + Migration Completeness and Immediate Execution (EMC-IE)
