@@ -6,7 +6,7 @@
 
 **Why:** Disponibilizar uma página de apresentação profissional para o projeto open-source, seguindo o padrão de landing pages de devtools modernas.
 
-**File Target:** `docs/tdd-landing-page.md`
+**File Target:** `specs/tdd-landing-page.md`
 
 ### Escopo
 - Landing page em **Vue.js 3 + Vite + Tailwind CSS**
