@@ -50,7 +50,8 @@
             "group": "Advanced",
             "pages": [
               "guides/ci-cd",
-              "guides/llm-providers"
+              "guides/llm-providers",
+              "guides/pilot-expectations"
             ]
           }
         ]

@@ -1,0 +1,56 @@
+---
+title: "Pilot expectations (no AI)"
+description: "What to expect when running the first Patcha pilot without AI assistance."
+---
+
+## Prerequisites
+
+- Node.js 18+
+- A project with `package-lock.json`, `pnpm-lock.yaml`, or `yarn.lock`
+- A clean git working tree
+
+## What you should see in `patcha scan`
+
+- A list of vulnerable packages with severity
+- A total count of findings
+- Output that matches your dependency tree
+
+If no vulnerabilities are found, the output should clearly indicate that.
+
+## What you should see in `patcha fix`
+
+- Automatic fixes applied where possible
+- Updated dependency versions (if applicable)
+- Clear status messages about what was fixed or skipped
+
+## Files likely to change
+
+- `package.json` (if direct dependencies are updated)
+- A lockfile (`package-lock.json`, `pnpm-lock.yaml`, or `yarn.lock`)
+
+## Validate the project still works
+
+Run the project test/build commands after fixing:
+
+```bash
+npm test
+npm run build
+```
+
+## Rollback (if needed)
+
+If you need to revert the pilot changes:
+
+```bash
+git checkout -- .
+```
+
+## Suggested pilot flow
+
+```bash
+git status -sb
+patcha scan
+patcha fix
+git status -sb
+git diff
+```
