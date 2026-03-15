@@ -1,6 +1,5 @@
 name: Deploy Frontend to Cloudflare Pages
 
-# Trigger workflow only on push events to the main branch with frontend changes
 on:
   push:
     branches:
@@ -15,11 +14,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Setup Node.js environment (v20 required for Wrangler)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -27,23 +24,14 @@ jobs:
           cache: 'npm'
           cache-dependency-path: landing-page/package-lock.json
 
-      # Step 3: Install dependencies using npm ci for clean, reliable installs
       - name: Install dependencies
         working-directory: landing-page
         run: npm ci
 
-      # Step 4: Build the Vue 3 + Vite application
-      # Environment variables are required at build time for Vite
       - name: Build application
         working-directory: landing-page
         run: npm run build
 
-      # Step 5: Install Wrangler CLI
-      - name: Install Wrangler
-        run: npm install -g wrangler
-
-      # Step 6: Deploy to Cloudflare Pages using Wrangler
-      # The _redirects file will be included in the dist directory automatically
       - name: Deploy to Cloudflare Pages
         working-directory: landing-page
         env:
