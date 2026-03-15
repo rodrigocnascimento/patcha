@@ -14,7 +14,8 @@
     "test:watch": "vitest",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "opencode:compile": "node scripts/opencode-compile.mjs"
   },
   "keywords": [
     "security",
