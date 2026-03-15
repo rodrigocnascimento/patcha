@@ -1,0 +1,6 @@
+header a img[alt="Patcha"],
+nav a img[alt="Patcha"] {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
