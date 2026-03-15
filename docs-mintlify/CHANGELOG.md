@@ -2,6 +2,11 @@
 
 All notable changes to this documentation will be documented in this file.
 
+## [0.7.1] - 2026-03-15
+
+### Fixed
+- Updated docs logo and corrected documentation link
+
 ## [0.7.0] - 2026-03-15
 
 ### Added
