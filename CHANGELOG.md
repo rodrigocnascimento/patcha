@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.1] - 2026-03-15
+
+### Fixed
+- Updated Mintlify docs branding and corrected docs link
+
 ## [0.7.0] - 2026-03-15
 
 ### Added

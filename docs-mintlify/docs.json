@@ -65,15 +65,15 @@
         },
         {
           "anchor": "Website",
-          "href": "https://patcha.site",
+          "href": "https://docs.patcha.site/",
           "icon": "globe"
         }
       ]
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/patcha-logo.png",
+    "dark": "/logo/patcha-logo.png"
   },
   "navbar": {
     "links": [
