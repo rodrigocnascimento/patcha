@@ -2,7 +2,7 @@ import { buildDepTree, readPackageJson, getDirectDependencies } from './arborist
 import { queryNpmAudit } from './npm-audit.js';
 import type { Vulnerability, ScanResult, ScanSummary, NpmAuditResponse, Severity } from './types.js';
 
-function transformVulnerabilities(auditResponse: NpmAuditResponse): Vulnerability[] {
+export function transformVulnerabilities(auditResponse: NpmAuditResponse): Vulnerability[] {
   const vulnerabilities: Vulnerability[] = [];
   const vulns = auditResponse.vulnerabilities;
 
@@ -34,7 +34,7 @@ function transformVulnerabilities(auditResponse: NpmAuditResponse): Vulnerabilit
   return vulnerabilities;
 }
 
-function calculateSummary(vulnerabilities: Vulnerability[]): ScanSummary {
+export function calculateSummary(vulnerabilities: Vulnerability[]): ScanSummary {
   return {
     critical: vulnerabilities.filter(v => v.severity === 'critical').length,
     high: vulnerabilities.filter(v => v.severity === 'high').length,
