@@ -24,12 +24,13 @@ function severityLabel(severity: string): string {
 export function formatVulnerability(vuln: Vulnerability): string {
   const color = severityColor(vuln.severity);
   const label = severityLabel(vuln.severity);
+  const fixInfo = vuln.fixable && vuln.fixVersion ? pc.green(` (fix: ${vuln.fixVersion})`) : '';
   
   return [
     color(` ${label} `),
     pc.bold(vuln.title),
     pc.gray(` - ${vuln.packageName}`),
-    vuln.fixable ? pc.green(` (fix: ${vuln.fixVersion})`) : '',
+    fixInfo,
   ].join(' ');
 }
 
@@ -46,7 +47,11 @@ export function formatSummary(summary: ScanResult['summary']): string {
   return lines.join('\n');
 }
 
-export function format(result: ScanResult): string {
+export interface FormatOptions {
+  displayCount?: number;
+}
+
+export function format(result: ScanResult, options: FormatOptions = {}): string {
   const lines: string[] = [];
   
   lines.push(pc.bold(pc.underline(`\nScan Results for: ${result.path}\n`)));
@@ -65,12 +70,10 @@ export function format(result: ScanResult): string {
     return order[a.severity] - order[b.severity];
   });
   
-  for (const vuln of sorted.slice(0, 20)) {
-    lines.push(formatVulnerability(vuln));
-  }
+  const display = options.displayCount ? sorted.slice(0, options.displayCount) : sorted;
   
-  if (result.vulnerabilities.length > 20) {
-    lines.push(pc.gray(`\n... and ${result.vulnerabilities.length - 20} more`));
+  for (const vuln of display) {
+    lines.push(formatVulnerability(vuln));
   }
   
   return lines.join('\n');

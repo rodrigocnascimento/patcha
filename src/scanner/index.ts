@@ -1,17 +1,6 @@
-import { buildDepTree, readPackageJson } from './arborist.js';
+import { buildDepTree, readPackageJson, getDirectDependencies } from './arborist.js';
 import { queryNpmAudit } from './npm-audit.js';
 import type { Vulnerability, ScanResult, ScanSummary, NpmAuditResponse, Severity } from './types.js';
-
-function mapSeverity(severity: string): Severity {
-  const map: Record<string, Severity> = {
-    low: 'low',
-    moderate: 'moderate',
-    medium: 'moderate',
-    high: 'high',
-    critical: 'critical',
-  };
-  return map[severity.toLowerCase()] || 'moderate';
-}
 
 function transformVulnerabilities(auditResponse: NpmAuditResponse): Vulnerability[] {
   const vulnerabilities: Vulnerability[] = [];
@@ -19,17 +8,27 @@ function transformVulnerabilities(auditResponse: NpmAuditResponse): Vulnerabilit
 
   if (!vulns) return vulnerabilities;
 
-  for (const [_id, advisory] of Object.entries(vulns)) {
-    vulnerabilities.push({
-      id: `npm:${advisory.module_name}`,
-      severity: mapSeverity(advisory.severity),
-      packageName: advisory.module_name,
-      packageVersion: '',
-      title: advisory.title,
-      url: advisory.url,
-      fixable: !!advisory.fix_available,
-      fixVersion: advisory.fix_available?.version,
-    });
+  for (const [pkgName, advisories] of Object.entries(vulns)) {
+    if (!Array.isArray(advisories)) continue;
+    
+    for (const advisory of advisories) {
+      const severityMap: Record<string, Severity> = {
+        low: 'low',
+        moderate: 'moderate',
+        high: 'high',
+        critical: 'critical',
+      };
+      
+      vulnerabilities.push({
+        id: `npm:${pkgName}:${advisory.id}`,
+        severity: severityMap[advisory.severity] || 'moderate',
+        packageName: pkgName,
+        packageVersion: advisory.vulnerable_versions,
+        title: advisory.title,
+        url: advisory.url,
+        fixable: true,
+      });
+    }
   }
 
   return vulnerabilities;
@@ -46,9 +45,10 @@ function calculateSummary(vulnerabilities: Vulnerability[]): ScanSummary {
 }
 
 export async function scan(projectPath: string): Promise<ScanResult> {
-  readPackageJson(projectPath);
-  const depTree = await buildDepTree(projectPath);
-  const auditResponse = await queryNpmAudit(depTree);
+  const pkg = readPackageJson(projectPath);
+  const deps = getDirectDependencies(projectPath);
+  await buildDepTree(projectPath);
+  const auditResponse = await queryNpmAudit(projectPath, pkg.name, pkg.version, deps);
   
   const vulnerabilities = transformVulnerabilities(auditResponse);
   const summary = calculateSummary(vulnerabilities);
