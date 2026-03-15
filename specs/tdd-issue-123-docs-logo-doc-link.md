@@ -2,7 +2,7 @@
 
 - What: Add the Patcha logo to the Mintlify docs site and update the docs link in the docs navigation to point to https://docs.patcha.site/.
 - Why: Ensure the documentation branding and external link are correct and consistent with the new docs domain.
-- File target: This document is intended for `docs/tdd-issue-123-docs-logo-doc-link.md`.
+- File target: This document is intended for `specs/tdd-issue-123-docs-logo-doc-link.md`.
 
 ## Proposed Technical Strategy
 

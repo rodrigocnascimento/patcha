@@ -6,7 +6,7 @@
 
 **Why:** Entregar a primeira versão funcional do produto que permite desenvolvedores escanear vulnerabilidades em seus projetos npm com output formatado no terminal.
 
-**File Target:** `docs/tdd-fase-1-cli-minimo-viavel.md`
+**File Target:** `specs/tdd-fase-1-cli-minimo-viavel.md`
 
 ### Escopo Técnico
 - CLI básico com Commander.js

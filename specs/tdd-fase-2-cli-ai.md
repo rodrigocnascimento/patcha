@@ -6,7 +6,7 @@
 
 **Why:** O npm audit fix resolve ~60-70% das vulnerabilidades. A Fase 2 visa resolver os casos complexos que requerem análise de breaking changes e sugestões de IA.
 
-**File Target:** `docs/tdd-phase-2-cli-ai.md`
+**File Target:** `specs/tdd-phase-2-cli-ai.md`
 
 ---
 
