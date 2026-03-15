@@ -41,15 +41,9 @@ jobs:
         run: npm install -g wrangler
 
       # Step 6: Deploy to Cloudflare Pages using Wrangler
-      # The _redirects file will be included in the dist directory automatically
       - name: Deploy to Cloudflare Pages
         working-directory: landing-page
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          wrangler pages project list || true
-          wrangler pages deploy dist \
-            --project-name=patcha-landing-page \
-            --branch=main \
-            --assets=dist
+        run: wrangler pages deploy dist --project-name=patcha-landing-page
