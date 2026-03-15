@@ -20,6 +20,4 @@ flowchart LR
 
 ## Example (Forbidden)
 
-```
-A --> B --> C
-```
+- ASCII diagramming (for example, arrow chains or box drawings) is not allowed.

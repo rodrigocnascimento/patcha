@@ -25,38 +25,13 @@ Não queremos ser apenas mais um scanner de vulnerabilidades. Queremos ser a pla
 
 Isse enxergamos isso em duas camadas inseparáveis:
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                         VISÃO GERAL                              │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  PROBLEMA TÉCNICO (Camada 1)                                    │
-│  → Vulnerabilidades em deps Node.js                              │
-│  → Trabalho manual de scan e fix                                 │
-│  → Incerteza sobre o que é seguro                                │
-│                                                                  │
-│  ▼                                                              │
-│                                                                  │
-│  Patcha CLI (Produto 1)                                 │
-│  → Open-source, gratuito                                         │
-│  → Resolve o problema técnico                                    │
-│  → É útil por si só                                              │
-│                                                                  │
-│  ▼                                                              │
-│                                                                  │
-│  PROBLEMA ORGANIZACIONAL (Camada 2)                             │
-│  → Falta de visibilidade em múltiplos projetos                  │
-│  → Dificuldade de provar compliance                             │
-│  → Sobrecarga de equipes de segurança                           │
-│                                                                  │
-│  ▼                                                              │
-│                                                                  │
-│  Patcha ENTERPRISE (Produto 2)                         │
-│  → Pago, plataforma web                                         │
-│  → Resolve o problema organizacional                            │
-│  → Gera valor recorrente                                        │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+  A["Problema tecnico (Camada 1)<br/>Vulnerabilidades em deps Node.js<br/>Trabalho manual de scan e fix<br/>Incerteza sobre o que e seguro"]
+  B["Patcha CLI (Produto 1)<br/>Open-source, gratuito<br/>Resolve o problema tecnico<br/>E util por si so"]
+  C["Problema organizacional (Camada 2)<br/>Falta de visibilidade em multiplos projetos<br/>Dificuldade de provar compliance<br/>Sobrecarga de equipes de seguranca"]
+  D["Patcha Enterprise (Produto 2)<br/>Pago, plataforma web<br/>Resolve o problema organizacional<br/>Gera valor recorrente"]
+  A --> B --> C --> D
 ```
 
 ---
@@ -105,38 +80,27 @@ Isse enxergamos isso em duas camadas inseparáveis:
 
 Nossa estratégia segue o modelo **open-core** que funcionou para empresas como GitLab, HashiCorp e Elastic, mas com uma diferença crucial: **o core técnico é tão bom que o open-source é valioso por si só**.
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                      ESTRATÉGIA DE PRODUTO                      │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  FASE 1: Construir um CLI tão bom que desenvolvedores amem usá-lo │
-│          → Resolve realmente o problema técnico                 │
-│          → É 100% gratuito e open-source                       │
-│          → Gera confiança, adoção orgânica e contribuições      │
-│                                                                 │
-│  FASE 2: Usar essa base para construir o enterprise             │
-│          → O mesmo core que faz o CLI funcionar                 │
-│          → É consumido como biblioteca pela plataforma web      │
-│          → Adiciona camadas de gestão, compliance e escala      │
-│          → Monetiza o valor organizacional                      │
-│                                                                 │
-│  FASE 3: Deixar o open-source impulsionar o enterprise          │
-│          → Comunidade contribui para melhorar o core            │
-│          → Usuários gratuitos viram defensores e leads          │
-│          → Reduz CAC e aumenta confiança no produto             │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+  P1["Fase 1<br/>Construir um CLI que resolve o problema tecnico<br/>100% gratuito e open-source<br/>Gera confianca e adocao organica"]
+  P2["Fase 2<br/>Usar o mesmo core na plataforma enterprise<br/>Adicionar gestao, compliance e escala<br/>Monetizar valor organizacional"]
+  P3["Fase 3<br/>Comunidade melhora o core<br/>Usuarios viram defensores e leads<br/>Reduz CAC e aumenta confianca"]
+  P1 --> P2 --> P3
 ```
 
 ### Por Que Isso é Diferente de Outros Modelos
 
-| Modelo | Problema | Nossa Abordagem |
-|---|---|---|
-| **Freemium puramente artificial** | O gratuito é uma demo castrada que não resolve nada de verdade | Nosso CLI gratuito **realmente resolve o problema técnico** — é útil mesmo sem pagar |
-| **Open-source com apoio comercial** | Difícil de monetizar porque o produto é completo | Separamos claramente: CLI resolve técnico, enterprise resolve organizacional |
-| **SaaS puro desde o início** | Falta de confiança, difícil de adotar em empresas security-conscious | Começamos com open-source para construir confiança antes de vender |
-| **Core fraco + features enterprise** | O gratuito não é útil, ninguém adota | Investimos pesado em fazer o core técnico ser excelente |
+```mermaid
+flowchart TB
+  A1["Freemium puramente artificial<br/>Problema: demo castrada, nao resolve<br/>Abordagem: CLI gratuito resolve o problema tecnico"]
+  A2["Open-source com apoio comercial<br/>Problema: dificil monetizar produto completo<br/>Abordagem: CLI resolve tecnico, enterprise resolve organizacional"]
+  A3["SaaS puro desde o inicio<br/>Problema: falta confianca para adocao<br/>Abordagem: open-source para construir confianca antes de vender"]
+  A4["Core fraco + features enterprise<br/>Problema: gratuito nao e util<br/>Abordagem: core tecnico excelente"]
+  A1
+  A2
+  A3
+  A4
+```
 
 ---
 
@@ -144,42 +108,38 @@ Nossa estratégia segue o modelo **open-core** que funcionou para empresas como 
 
 ### Jornada do Desenvolvedor Individual (Produto 1)
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                           JORNADA                                │
-├─────────────────────────────────────────────────────────────────┤
-│  1. Descobre o Patcha (GitHub, recomendação)           │
-│  2. Instala: npm i -g patcha                           │
-│  3. Roda primeira vez: patcha scan ./meu-projeto       │
-│  4. Vê vulnerabilidades e sugestões de fix                      │
-│  5. Aplica fixes automáticos (nível 1) com um comando           │
-│  6. Usa --ai para casos complexos e revisa sugestões da IA      │
-│  7. Cria MR automaticamente com --mr                            │
-│  8. Integra no seu workflow de desenvolvimento                  │
-│  9. Recomenda para colegas de time                              │
-│  10. Sugere melhorias no GitHub (issues/PRs)                    │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+  D1["1. Descobre o Patcha (GitHub, recomendacao)"]
+  D2["2. Instala: npm i -g patcha"]
+  D3["3. Roda primeira vez: patcha scan ./meu-projeto"]
+  D4["4. Ve vulnerabilidades e sugestoes de fix"]
+  D5["5. Aplica fixes automaticos (nivel 1)"]
+  D6["6. Usa --ai para casos complexos e revisa sugestoes"]
+  D7["7. Cria MR automaticamente com --mr"]
+  D8["8. Integra no workflow de desenvolvimento"]
+  D9["9. Recomenda para colegas de time"]
+  D10["10. Sugere melhorias no GitHub (issues/PRs)"]
+  D1 --> D2 --> D3 --> D4 --> D5 --> D6 --> D7 --> D8 --> D9 --> D10
 ```
 
 **Resultado:** Desenvolvedor mais produtivo, menos ansioso sobre segurança, se sente empoderado.
 
 ### Jornada da Equipe de Segurança (Produto 2)
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                           JORNADA                                │
-├─────────────────────────────────────────────────────────────────┤
-│  1. Vê que múltiplos times estão usando o Patcha CLI   │
-│  2. Avalia a plataforma enterprise para gestão centralizada     │
-│  3. Faz deploy (SaaS ou self-hosted)                           │
-│  4. Conecta todos os repositórios da organização               │
-│  5. Configura scans automáticos diários                       │
-│  6. Define políticas de SLA (crítico em 48h, etc.)             │
-│  7. Recebe alertas quando algo foge do SLA                     │
-│  8. Gera relatório de compliance com um clique para auditoria   │
-│  9. Usa audit logs para investigar incidentes                  │
-│ 10. Otimiza políticas baseado em métricas de tendências         │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+  S1["1. Ve que multiplos times usam o Patcha CLI"]
+  S2["2. Avalia a plataforma enterprise para gestao centralizada"]
+  S3["3. Faz deploy (SaaS ou self-hosted)"]
+  S4["4. Conecta repositorios da organizacao"]
+  S5["5. Configura scans automaticos diarios"]
+  S6["6. Define politicas de SLA (critico em 48h)"]
+  S7["7. Recebe alertas quando algo foge do SLA"]
+  S8["8. Gera relatorio de compliance para auditoria"]
+  S9["9. Usa audit logs para investigar incidentes"]
+  S10["10. Otimiza politicas com metricas de tendencias"]
+  S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8 --> S9 --> S10
 ```
 
 **Resultado:** Equipe de segurança mais estratégica, menos operacional, capaz de provar compliance facilmente.
@@ -190,45 +150,25 @@ Nossa estratégia segue o modelo **open-core** que funcionou para empresas como 
 
 Nosso modelo é simples: **o open-source cria o mercado, o enterprise captura o valor**.
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                     MODELO DE NEGÓCIO                           │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  CAMADA 1: OPEN-SOURCE (CLI)                                    │
-│  → Custo: desenvolvimento e manutenção do core                  │
-│  → Receita: $0                                                  │
-│  → Valor:                                                       │
-│    • Adoção orgânica (GitHub stars, downloads, word of mouth)   │
-│    • Confiança e credibilidade no mercado                       │
-│    • Comunidade que contribui com melhorias                     │
-│    • Pipeline de leads qualificados (empresas que usam o CLI)   │
-│                                                                 │
-│  CAMADA 2: ENTERPRISE (Plataforma)                              │
-│  → Custo: desenvolvimento de dashboard, API, banco, etc.        │
-│  → Receita: assinaturas recorrentes (SaaS/self-hosted)          │
-│  → Valor:                                                       │
-│    • Resolve problemas organizacionais caros                    │
-│    • Pricing por organização (não por desenvolvedor)            │
-│    • Margens altas (80%+ após escala)                           │
-│    • Baixo churn (integração profunda, compliance crítico)      │
-│                                                                 │
-│  O CÍCLO VIRTUOSO:                                              │
-│  Mais usuários do CLI → Mais leads para o enterprise            │
-│  Mais clientes enterprise → Mais investimento no core           │
-│  Melhor core → Mais valor para ambos os produtos                │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+  O["Camada 1: Open-source (CLI)<br/>Custo: desenvolvimento e manutencao do core<br/>Receita: $0<br/>Valor: adocao organica, confianca, comunidade, leads"]
+  E["Camada 2: Enterprise (Plataforma)<br/>Custo: dashboard, API, banco<br/>Receita: assinaturas recorrentes<br/>Valor: resolve problemas organizacionais, pricing por organizacao, margens altas, baixo churn"]
+  V["Ciclo virtuoso<br/>Mais usuarios do CLI -> mais leads<br/>Mais clientes enterprise -> mais investimento no core<br/>Melhor core -> mais valor para ambos"]
+  O --> E --> V
 ```
 
 ### Projeção de Receita (Conservadora)
 
-| Ano | Usuários CLI Gratuitos | Clientes Team ($99/mês) | Clientes Business ($299/mês) | Clientes Enterprise ($999/mês) | ARR |
-|---|---|---|---|---|---|
-| 1 | 5.000 | 20 | 5 | 0 | $42.000 |
-| 2 | 25.000 | 100 | 30 | 5 | $288.000 |
-| 3 | 100.000 | 300 | 100 | 20 | $960.000 |
-| 4 | 250.000 | 500 | 200 | 50 | $2.100.000 |
+```mermaid
+flowchart TB
+  P["Projecao de Receita (Conservadora)"]
+  Y1["Ano 1<br/>Usuarios CLI: 5.000<br/>Team: 20<br/>Business: 5<br/>Enterprise: 0<br/>ARR: $42.000"]
+  Y2["Ano 2<br/>Usuarios CLI: 25.000<br/>Team: 100<br/>Business: 30<br/>Enterprise: 5<br/>ARR: $288.000"]
+  Y3["Ano 3<br/>Usuarios CLI: 100.000<br/>Team: 300<br/>Business: 100<br/>Enterprise: 20<br/>ARR: $960.000"]
+  Y4["Ano 4<br/>Usuarios CLI: 250.000<br/>Team: 500<br/>Business: 200<br/>Enterprise: 50<br/>ARR: $2.100.000"]
+  P --> Y1 --> Y2 --> Y3 --> Y4
+```
 
 **Assumptions:**
 - Taxa de conversão: 0,5% dos usuários gratuitos para Team, 0,1% para Business, 0,02% para Enterprise
@@ -239,33 +179,17 @@ Nosso modelo é simples: **o open-source cria o mercado, o enterprise captura o 
 
 ## O Ciclo de Valor: Como Ambos os Produtos se Beneficiam
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                       CICLO DE VALOR                            │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  1. Usuário gratuito resolve um problema técnico difícil       │
-│     usando o CLI com assistência de IA                         │
-│                                                                 │
-│  2. Ele conta para seu time ou posta no LinkedIn/Reddit         │
-│                                                                 │
-│  3. Líder de segurança vê que múltiplos times estão usando      │
-│     e quer gestão centralizada                                 │
-│                                                                 │
-│  4. Adquire o enterprise para visibilidade e compliance         │
-│                                                                 │
-│  5. Pagamento financia melhorias no core                        │
-│     (scanner mais rápido, melhores providers de LLM, etc.)     │
-│                                                                 │
-│  6. Melhorias no core beneficiam AMBOS os produtos              │
-│     → CLI fica mais preciso e rápido                           │
-│     → Enterprise fica mais confiável                           │
-│                                                                 │
-│  7. Usuário gratuito tem experiência ainda melhor              │
-│     e conta para mais pessoas                                  │
-│                                                                 │
-│  8. O ciclo se repete                                          │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+  C1["1. Usuario gratuito resolve um problema tecnico com o CLI"]
+  C2["2. Conta para o time ou publica em comunidades"]
+  C3["3. Lider de seguranca busca gestao centralizada"]
+  C4["4. Adquire o enterprise para visibilidade e compliance"]
+  C5["5. Pagamento financia melhorias no core"]
+  C6["6. Melhorias no core beneficiam ambos os produtos"]
+  C7["7. Usuario gratuito tem experiencia melhor e indica"]
+  C8["8. O ciclo se repete"]
+  C1 --> C2 --> C3 --> C4 --> C5 --> C6 --> C7 --> C8
 ```
 
 Este ciclo é o que torna o modelo sustentável e escalável. Não estamos vendendo "funcionalidades" — estamos vendendo **resultado**: menos trabalho manual, mais segurança, compliance fácil.

@@ -14,11 +14,14 @@
 
 ### 1. Resolution Engine (3 Níveis)
 
-| Nível | Tipo | Descrição |
-|-------|------|-----------|
-| 1 | Auto-fix | Patch/minor updates (semver-compatível) |
-| 2 | Smart upgrade | Major bumps com análise de breaking changes |
-| 3 | AI-assisted | LLM para resolver casos complexos |
+```mermaid
+flowchart TB
+  L0["Resolution Engine (3 niveis)"]
+  L1["Nivel 1 - Auto-fix<br/>Patch/minor updates (semver-compatível)"]
+  L2["Nivel 2 - Smart upgrade<br/>Major bumps com analise de breaking changes"]
+  L3["Nivel 3 - AI-assisted<br/>LLM para resolver casos complexos"]
+  L0 --> L1 --> L2 --> L3
+```
 
 ### 2. LLM Provider System
 
