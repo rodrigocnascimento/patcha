@@ -1,7 +1,4 @@
 {
-  "name": "patcha-landing-page",
-  "compatibility_date": "2026-03-15",
-  "pages_build": {
-    "platform": "static"
-  }
+  "name": "patcha",
+  "compatibility_date": "2026-03-15"
 }
