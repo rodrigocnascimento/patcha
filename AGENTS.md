@@ -316,48 +316,11 @@ Regras:
 
 entrada mais recente no topo não inventar categorias vazias descrever somente mudanças reais da entrega manter texto objetivo e curto
 
-## 6.1 Atualizar documentação em docs-mintlify (OBRIGATÓRIO)
-
-Após atualizar o CHANGELOG.md, você DEVE atualizar a documentação em `docs-mintlify/`:
-
-1. Verifique se existe o arquivo `docs-mintlify/CHANGELOG.md`
-2. Se não existir, crie-o com o mesmo formato do CHANGELOG.md principal
-3. Se existir, adicione a nova entrada no topo seguindo o mesmo formato
-
-Formato para docs-mintlify/CHANGELOG.md:
-
-```md
-## [<new-version>] - <YYYY-MM-DD>
-
-### Added
-- ...
-
-### Changed
-- ...
-
-### Fixed
-- ...
-
-### Removed
-- ...
-```
-
-Certifique-se de que a versão e a data sejam idênticas às do CHANGELOG.md principal.
-
-## 7. Sincronizar docs-mintlify (OBRIGATÓRIO)
-
-Após atualizar o CHANGELOG.md, você DEVE sincronizar as mudanças com o repo docs:
-
-1. Faça commit das mudanças em `docs-mintlify/` no repo patcha
-2. O workflow `.github/workflows/sync-docs.yml` detectará as mudanças e fará sync automático para o repo docs
-
-Certifique-se de que o workflow tem as permissões necessárias (DOCS_REPO_TOKEN).
-
-## 8. Validar consistência
+## 7. Validar consistência
 
 Após atualizar a versão e o changelog, valide: se a nova versão está consistente em todos os arquivos relevantes se o changelog corresponde ao que foi entregue se o bump aplicado corresponde ao tipo aprovado
 
-## 9. Preparar release metadata
+## 8. Preparar release metadata
 
 Ao final, fornecer: versão anterior nova versão arquivos alterados no release update sugestão de commit message sugestão de tag
 
@@ -367,7 +330,7 @@ Commit: chore(release): bump version to <new-version>
 
 Tag: v<new-version>
 
-## 10. Regras obrigatórias
+## 9. Regras obrigatórias
 
 - Nunca executar este comando sem aprovação explícita 
 - Nunca fazer push automaticamente
