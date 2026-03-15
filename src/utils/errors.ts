@@ -1,4 +1,5 @@
 import pc from 'picocolors';
+import { logger } from './logger.js';
 
 export class PatchaError extends Error {
   constructor(
@@ -33,14 +34,14 @@ export class NpmAuditError extends PatchaError {
 
 export function handleError(error: unknown): void {
   if (error instanceof PatchaError) {
-    console.error(pc.red(`Error: ${error.message}`));
+    logger.error(pc.red(`Error: ${error.message}`));
     return;
   }
 
   if (error instanceof Error) {
-    console.error(pc.red(`Error: ${error.message}`));
+    logger.error(pc.red(`Error: ${error.message}`));
     return;
   }
 
-  console.error(pc.red('Unknown error occurred'));
+  logger.error(pc.red('Unknown error occurred'));
 }

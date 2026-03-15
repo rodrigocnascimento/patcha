@@ -1,0 +1,127 @@
+---
+title: "fix"
+description: "Fix vulnerabilities in dependencies"
+---
+
+The `fix` command resolves vulnerabilities using Patcha's multi-level resolution system.
+
+## Usage
+
+```bash
+patcha fix [path] [options]
+```
+
+## Arguments
+
+| Argument | Description | Default |
+|----------|-------------|---------|
+| `path` | Project path to fix | Current directory |
+
+## Options
+
+| Option | Alias | Description |
+|--------|-------|-------------|
+| `--ai` | - | Use AI to fix complex vulnerabilities |
+| `--dry-run` | - | Show what would be fixed without making changes |
+| `--yes` | `-y` | Auto-confirm fixes |
+| `--auto` | - | Non-interactive mode for CI/CD |
+| `--mr` | - | Create branch, commit and merge request |
+| `--json` | - | Output results as JSON |
+| `--verbose` | `-v` | Enable verbose debug output |
+
+## Examples
+
+### Basic Fix
+
+```bash
+patcha fix
+```
+
+Prompts for confirmation before applying fixes.
+
+### Dry Run
+
+```bash
+patcha fix --dry-run
+```
+
+Shows what would be fixed without making any changes.
+
+### Auto-confirm
+
+```bash
+patcha fix --yes
+```
+
+Applies fixes without prompting for confirmation.
+
+### CI Mode
+
+```bash
+patcha fix --auto
+```
+
+Non-interactive mode that skips all prompts. Suitable for CI/CD pipelines.
+
+### AI-assisted Fix
+
+```bash
+patcha fix --ai
+```
+
+Uses LLM to fix complex vulnerabilities that can't be resolved automatically.
+
+Requires:
+- An LLM provider configured
+- API key set
+
+See [LLM Providers](/guides/llm-providers) for setup.
+
+### Create Merge Request
+
+```bash
+patcha fix --mr
+```
+
+Automatically:
+1. Creates a new branch
+2. Commits the changes
+3. Creates a merge/pull request
+
+### JSON Output
+
+```bash
+patcha fix --json
+```
+
+Useful for parsing results in scripts.
+
+## Exit Codes
+
+- `0`: All vulnerabilities resolved
+- `1`: Some vulnerabilities could not be resolved
+- `2`: Error occurred
+
+## Resolution Levels
+
+The fix command uses three resolution levels:
+
+1. **Level 1**: Auto-fix (direct version updates)
+2. **Level 2**: Smart upgrade (compatibility analysis)
+3. **Level 3**: AI-assisted (for complex cases)
+
+## Output Example
+
+```
+🔍 Scanning for vulnerabilities...
+
+⚡ Resolving vulnerabilities...
+
+Resolution Summary:
+  ✓ Level 1 (Auto-fix): 3
+  ✓ Level 2 (Smart upgrade): 2
+  🤖 Level 3 (AI-assisted): 1
+  ✗ No fix available: 1
+
+Total resolved: 6 of 7
+```

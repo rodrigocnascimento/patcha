@@ -16,87 +16,87 @@
 
 ---
 
-## Fase 0: Fundação
+## Fase 0: Fundação ✅
 
 ### Técnico
-- Repositório Git inicializado
-- Estrutura de pastas definida (src/, tests/, specs/)
-- Configuração básica (TypeScript, ESLint, Vitest)
-- README inicial com visão do projeto
-- Licença definida (MIT ou Apache 2.0)
+- [x] Repositório Git inicializado
+- [x] Estrutura de pastas definida (src/, tests/, specs/)
+- [x] Configuração básica (TypeScript, ESLint, Vitest)
+- [x] README inicial com visão do projeto
+- [x] Licença definida (Apache 2.0)
 
 ### Experiência do Usuário
-- Nenhuma (fase de setup interno)
+- [x] Nenhuma (fase de setup interno)
 
 ### Negócio
-- Definição da visão de produto
-- Pesquisa inicial de mercado informal
-- Validação do problema com desenvolvedores conhecidos
-- Definição do modelo open-core como estratégia
+- [x] Definição da visão de produto
+- [x] Pesquisa inicial de mercado informal
+- [x] Validação do problema com desenvolvedores conhecidos
+- [x] Definição do modelo open-core como estratégia
 
 ---
 
-## Fase 1: CLI Mínimo Viável
+## Fase 1: CLI Mínimo Viável ✅
 
 ### Técnico
-- CLI básico com Commander.js
-- Scanner que lê package.json e package-lock.json
-- Integração com @npmcli/arborist para árvore de dependências
-- Consumo da npm audit JSON API
-- Estrutura de dados para vulnerabilidades (CVE, severidade, pacote afetado)
-- Output formatado em terminal (cores, tabelas simples)
-- Tratamento básico de erros
+- [x] CLI básico com Commander.js
+- [x] Scanner que lê package.json e package-lock.json
+- [x] Integração com @npmcli/arborist para árvore de dependências
+- [x] Consumo da npm audit JSON API
+- [x] Estrutura de dados para vulnerabilidades (CVE, severidade, pacote afetado)
+- [x] Output formatado em terminal (cores, tabelas simples)
+- [x] Tratamento básico de erros
 
 ### Experiência do Usuário
-- Comando `patcha scan [path]`
-- Output legível no terminal mostrando contagem por severidade
-- Código de saída adequado para scripts (0 = sucesso, 1 = vulnerabilidades encontradas)
-- Help completo (`--help`)
-- Versionamento semântico via `package.json`
+- [x] Comando `patcha scan [path]`
+- [x] Output legível no terminal mostrando contagem por severidade
+- [x] Código de saída adequado para scripts (0 = sucesso, 1 = vulnerabilidades encontradas)
+- [x] Help completo (`--help`)
+- [x] Versionamento semântico via `package.json`
 
 ### Negócio
-- Validação do conceito com 5-10 desenvolvedores externos
-- Coleta de feedback sobre dor real e utilidade básica
-- Primeiros issues no GitHub de usuários iniciais
-- Preparação para lançamento open-source inicial
+- [x] Validação do conceito com 5-10 desenvolvedores externos
+- [x] Coleta de feedback sobre dor real e utilidade básica
+- [x] Primeiros issues no GitHub de usuários iniciais
+- [x] Preparação para lançamento open-source inicial
 
 ---
 
-## Fase 2: CLI Aprimorado com IA
+## Fase 2: CLI Aprimorado com IA ✅
 
 ### Técnico
-- Resolution Engine com 3 níveis:
-  - Nível 1: Auto-fix semver-compatível (patch/minor)
-  - Nível 2: Análise de breaking changes para major bumps
-  - Nível 3: Integração com providers de LLM (HuggingFace free → Gemini free)
-- Sistema de providers LLM extensível (interface + registry)
-- Cadeia de fallback configurável (provider pago → HF → Gemini → nenhuma IA)
-- Context enrichment para LLM (changelog, código afetado, caminho de dependência)
-- Cache inteligente de advisories e respostas de LLM
-- Suporte a múltiplos projetos via arquivo de configuração
-- Criação automática de branch e commit para fixes
-- Integração Git multi-plataforma (GitLab prioritária, GitHub)
+- [x] Resolution Engine com 3 níveis:
+  - [x] Nível 1: Auto-fix semver-compatível (patch/minor)
+  - [x] Nível 2: Análise de breaking changes para major bumps
+  - [x] Nível 3: Integração com providers de LLM (HuggingFace free → Gemini free)
+- [x] Sistema de providers LLM extensível (interface + registry)
+- [x] Cadeia de fallback configurável (provider pago → HF → Gemini → nenhuma IA)
+- [x] Context enrichment para LLM (changelog, código afetado, caminho de dependência)
+- [x] Cache inteligente de advisories e respostas de LLM
+- [x] Suporte a múltiplos projetos via arquivo de configuração
+- [x] Criação automática de branch e commit para fixes
+- [x] Integração Git multi-plataforma (GitLab prioritária, GitHub)
 
 ### Experiência do Usuário
-- Novos comandos:
-  - `patcha fix [path]` (auto-fix nível 1)
-  - `patcha fix --ai [path]` (fix com IA para todos os níveis)
-  - `patcha fix --mr` (fix + cria MR automático)
-  - `patcha config` (gerencia API keys e preferences)
-- Output aprimorado: explicações legíveis das sugestões da IA
-- Modo interativo para aprovação/rejeição de sugestões de IA
-- Modo não-interativo (--auto) para uso em CI/CD
-- Suporte a output em JSON e além do terminal
-- Verbose mode para debug
+- [x] Novos comandos:
+  - [x] `patcha fix [path]` (auto-fix nível 1)
+  - [x] `patcha fix --ai [path]` (fix com IA para todos os níveis)
+  - [x] `patcha fix --mr` (fix + cria MR automático)
+  - [x] `patcha config` (gerencia API keys e preferences)
+- [x] Output aprimorado: explicações legíveis das sugestões da IA
+- [x] Modo interativo para aprovação/rejeição de sugestões de IA
+- [x] Modo não-interativo (--auto) para uso em CI/CD
+- [x] Suporte a output em JSON e além do terminal
+- [x] Verbose mode para debug
 
 ### Negócio
-- Lançamento oficial open-source no npm
-- Primeiros 100 downloads e estrelas no GitHub
-- Posts técnicos em blog explicando como funciona a IA
-- Participação em comunidades (Reddit, Dev.to, Twitter/X)
-- Primeiros contributions externos (bug fixes, documentação)
-- Validação de que a IA resolve casos que `npm audit fix` não resolve
-- Preparação para o primeiro case study de uso real
+- [ ] Lançamento oficial open-source no npm
+- [ ] Primeiros 100 downloads e estrelas no GitHub
+- [ ] Posts técnicos em blog explicando como funciona a IA
+- [ ] Participação em comunidades (Reddit, Dev.to, Twitter/X)
+- [ ] Primeiros contributions externos (bug fixes, documentação)
+- [ ] Validação de que a IA resolve casos que `npm audit fix` não resolve
+- [ ] Preparação para o primeiro case study de uso real
 
 ---
 

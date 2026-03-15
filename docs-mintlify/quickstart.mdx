@@ -1,0 +1,95 @@
+---
+title: "Quickstart"
+description: "Get started with Patcha in minutes"
+---
+
+## Get Started in Three Steps
+
+### Step 1: Scan for Vulnerabilities
+
+Run the scan command in your project directory:
+
+```bash
+patcha scan
+```
+
+This will:
+- Parse your lockfile (package-lock.json, pnpm-lock.yaml, or yarn.lock)
+- Analyze your dependency tree
+- Report all found vulnerabilities
+
+### Step 2: Review Results
+
+Patcha displays vulnerabilities sorted by severity:
+
+```
+🔍 Scanning dependencies...
+
+Vulnerabilities Found:
+┌─────────────────┬──────────┬─────────────┐
+│ Package         │ Severity │ Version     │
+├─────────────────┼──────────┼─────────────┤
+│ lodash          │ high     │ 4.17.20     │
+│ minimist        │ moderate │ 1.2.5       │
+└─────────────────┴──────────┴─────────────┘
+
+Total: 2 vulnerabilities
+```
+
+### Step 3: Apply Fixes
+
+Run the fix command to resolve vulnerabilities:
+
+```bash
+patcha fix
+```
+
+Patcha will attempt to resolve vulnerabilities using its multi-level resolution system:
+
+- **Level 1**: Auto-fix (direct version updates)
+- **Level 2**: Smart upgrade (analyzes compatibility)
+- **Level 3**: AI-assisted (for complex cases)
+
+## Example Workflow
+
+```bash
+# Full workflow
+patcha scan
+patcha fix
+
+# Dry run to see what would happen
+patcha fix --dry-run
+
+# Auto-confirm and create MR
+patcha fix --auto --mr
+```
+
+## Command Options
+
+| Command | Description |
+|---------|-------------|
+| `patcha scan` | Scan for vulnerabilities |
+| `patcha fix` | Fix vulnerabilities |
+| `patcha config list` | Show current configuration |
+
+## Next Steps
+
+<CardGroup cols={2}>
+
+<Card title="Scan Command" icon="magnifying-glass" href="/commands/scan">
+  Learn all scan options
+</Card>
+
+<Card title="Fix Command" icon="wrench" href="/commands/fix">
+  Explore fix options
+</Card>
+
+<Card title="CI/CD" icon="server" href="/guides/ci-cd">
+  Integrate with your pipeline
+</Card>
+
+<Card title="LLM Providers" icon="brain" href="/guides/llm-providers">
+  Set up AI assistance
+</Card>
+
+</CardGroup>

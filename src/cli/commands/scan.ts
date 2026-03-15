@@ -4,6 +4,7 @@ import { existsSync } from 'fs';
 import { scan } from '../../scanner/index.js';
 import { format, type FormatOptions } from '../../output/formatter.js';
 import { handleError, ProjectNotFoundError } from '../../utils/errors.js';
+import { logger } from '../../utils/logger.js';
 import type { Vulnerability, Severity } from '../../scanner/types.js';
 
 export const scanCommand = new Command('scan')
@@ -49,7 +50,7 @@ export const scanCommand = new Command('scan')
       const displayCount = options.all ? filtered.length : parseInt(options.number || '25', 10);
       
       if (options.json) {
-        console.log(JSON.stringify({
+        logger.info(JSON.stringify({
           ...result,
           vulnerabilities: filtered,
         }, null, 2));
@@ -68,14 +69,14 @@ export const scanCommand = new Command('scan')
           vulnerabilities: display,
         };
         
-        console.log(format(resultWithFiltered, formatOpts));
+        logger.info(format(resultWithFiltered, formatOpts));
         
         if (filtered.length > displayCount) {
-          console.log(`\nShowing ${display.length} of ${filtered.length} vulnerabilities`);
+          logger.info(`\nShowing ${display.length} of ${filtered.length} vulnerabilities`);
         }
         
         if (options.verbose && filtered.length > 0) {
-          console.log('\n' + filtered.map((v: Vulnerability) => `${v.id}: ${v.severity}`).join('\n'));
+          logger.info('\n' + filtered.map((v: Vulnerability) => `${v.id}: ${v.severity}`).join('\n'));
         }
       }
       

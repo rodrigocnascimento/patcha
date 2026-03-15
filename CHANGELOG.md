@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.0] - 2026-03-15
+
+### Added
+- Resolution Engine with 3-level vulnerability fixing (level1 auto-fix, level2 smart upgrade, level3 AI-assisted)
+- LLM Providers system (Anthropic Claude, Google Gemini, OpenAI GPT)
+- New CLI commands: `fix` and `config`
+- Configuration system with `.patcharc` file
+- Pino logger for structured logging
+- Mintlify documentation in `docs-mintlify/`
+- Automated docs sync workflow (`.github/workflows/sync-docs.yml`)
+
+### Changed
+- Updated AGENTS.md with release and docs sync procedures
+
 ## [0.5.0] - 2026-03-15
 
 ### Fixed
