@@ -34,5 +34,5 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add .
-          git diff --staged --quiet || git commit -m "docs: sync from patcha $(git log -1 --format=%H --no-walk=short)"
+          git diff --staged --quiet || git commit -m "docs: sync from patcha $(git log -1 --format=%h)"
           git push
