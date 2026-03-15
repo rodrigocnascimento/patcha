@@ -11,6 +11,7 @@ import { resolveLevel3, needsLevel3 } from './level3.js';
 import { getApiKey, loadConfig } from '../../config/index.js';
 import { getProvider, isValidProvider } from '../../llm/index.js';
 import type { LLMProvider } from '../../llm/providers/interface.js';
+import { MissingConfigurationError } from '../../utils/errors.js';
 
 export async function resolve(
   vulnerabilities: Vulnerability[],
@@ -27,12 +28,19 @@ export async function resolve(
 
   if (context.useAI) {
     const providerName = config.llmProvider;
-    if (providerName !== 'none' && isValidProvider(providerName)) {
-      const apiKey = getApiKey(context.projectPath, providerName);
-      if (apiKey) {
-        provider = getProvider(providerName, apiKey);
-      }
+    if (providerName === 'none' || !isValidProvider(providerName)) {
+      throw new MissingConfigurationError(
+        "AI provider not specified. Please run 'patcha init' or set 'llmProvider' in your configuration."
+      );
     }
+    
+    const apiKey = getApiKey(context.projectPath, providerName);
+    if (!apiKey) {
+      throw new MissingConfigurationError(
+        `API key for '${providerName}' not found. Please run 'patcha init' or configure it.`
+      );
+    }
+    provider = getProvider(providerName, apiKey);
   }
 
   for (const vuln of vulnerabilities) {

@@ -32,6 +32,13 @@ export class NpmAuditError extends PatchaError {
   }
 }
 
+export class MissingConfigurationError extends PatchaError {
+  constructor(message: string) {
+    super(message, 'MISSING_CONFIGURATION');
+    this.name = 'MissingConfigurationError';
+  }
+}
+
 export function handleError(error: unknown): void {
   if (error instanceof PatchaError) {
     logger.error(pc.red(`Error: ${error.message}`));

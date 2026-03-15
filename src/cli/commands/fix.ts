@@ -5,7 +5,7 @@ import pc from 'picocolors';
 import { scan } from '../../scanner/index.js';
 import { resolve as resolveVulnerabilities } from '../../scanner/resolver/index.js';
 import { applyFixesWithGit } from '../../utils/git.js';
-import { handleError, ProjectNotFoundError } from '../../utils/errors.js';
+import { handleError, ProjectNotFoundError, MissingConfigurationError } from '../../utils/errors.js';
 import { logger } from '../../utils/logger.js';
 import type { ResolutionContext } from '../../scanner/resolver/types.js';
 
@@ -152,6 +152,10 @@ export const fixCommand = new Command('fix')
 
       process.exit(summary.failedCount > 0 ? 1 : 0);
     } catch (error) {
+      if (error instanceof MissingConfigurationError) {
+        logger.error(pc.yellow(error.message));
+        process.exit(2);
+      }
       handleError(error);
       process.exit(2);
     }
