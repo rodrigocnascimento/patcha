@@ -1,0 +1,73 @@
+---
+title: "Architecture"
+description: "How Patcha scans and patches vulnerabilities"
+---
+
+## Overview
+
+Patcha operates in three main stages:
+
+```
+Dependency Analysis → Vulnerability Detection → Patch Application
+```
+
+## Stage 1: Dependency Analysis
+
+Patcha parses your lockfile to build a complete dependency graph:
+
+- **npm**: `package-lock.json`
+- **pnpm**: `pnpm-lock.yaml`
+- **yarn**: `yarn.lock`
+
+The `@npmcli/arborist` library is used to analyze the full tree, including nested dependencies.
+
+## Stage 2: Vulnerability Detection
+
+Vulnerabilities are detected by querying:
+
+- **npm Audit API**: Official vulnerability database
+- **Patch Registry**: Known patches for specific vulnerabilities
+
+Each vulnerability includes:
+- Package name and version
+- Severity level (critical, high, moderate, low)
+- Vulnerability ID
+- Recommended fix
+
+## Stage 3: Patch Application
+
+Patcha applies fixes at three levels:
+
+### Level 1: Auto-fix
+
+Direct version updates that maintain backward compatibility.
+
+### Level 2: Smart Upgrade
+
+Analyzes the dependency tree to find the minimal upgrade that resolves the vulnerability while maintaining compatibility.
+
+### Level 3: AI-assisted
+
+Uses LLM providers to analyze complex cases and suggest fixes for vulnerabilities that can't be resolved automatically.
+
+## Architecture Diagram
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                      patcha CLI                          │
+├─────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐  │
+│  │   Scanner   │→ │  Resolver   │→ │   Git Utils    │  │
+│  │  (arborist) │  │  (levels)   │  │  (apply fixes) │  │
+│  └─────────────┘  └─────────────┘  └─────────────────┘  │
+│        ↓                ↓                ↓             │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐  │
+│  │ npm-audit   │  │   LLM       │  │    GitHub      │  │
+│  │   API       │  │  Providers  │  │    API         │  │
+│  └─────────────┘  └─────────────┘  └─────────────────┘  │
+└─────────────────────────────────────────────────────────┘
+```
+
+## Configuration
+
+Patcha stores configuration in `.patcharc` within your project directory. See the [config command](/commands/config) for details.

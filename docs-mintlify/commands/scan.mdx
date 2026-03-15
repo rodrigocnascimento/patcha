@@ -1,0 +1,98 @@
+---
+title: "scan"
+description: "Scan for vulnerabilities in dependencies"
+---
+
+The `scan` command analyzes your project for known vulnerabilities.
+
+## Usage
+
+```bash
+patcha scan [path] [options]
+```
+
+## Arguments
+
+| Argument | Description | Default |
+|----------|-------------|---------|
+| `path` | Project path to scan | Current directory |
+
+## Options
+
+| Option | Alias | Description |
+|--------|-------|-------------|
+| `--verbose` | `-v` | Show verbose output |
+| `--json` | `-j` | Output in JSON format |
+| `--level <level>` | `-l` | Filter by severity (critical, high, moderate, low) |
+| `--number <count>` | `-n` | Number of vulnerabilities to display (default: 25) |
+| `--all` | `-a` | Show all vulnerabilities |
+
+## Examples
+
+### Basic Scan
+
+```bash
+patcha scan
+```
+
+### Filter by Severity
+
+```bash
+# Only show critical vulnerabilities
+patcha scan --level critical
+
+# Only show high and critical
+patcha scan --level high
+```
+
+### JSON Output
+
+```bash
+patcha scan --json
+```
+
+Useful for CI/CD pipelines:
+
+```bash
+patcha scan --json > vulnerability-report.json
+```
+
+### Show All Vulnerabilities
+
+```bash
+patcha scan --all
+```
+
+### Verbose Output
+
+```bash
+patcha scan --verbose
+```
+
+Shows additional details for each vulnerability.
+
+## Exit Codes
+
+- `0`: No vulnerabilities found
+- `1`: Vulnerabilities found
+- `2`: Error occurred
+
+## Output Example
+
+```
+🔍 Scanning dependencies...
+
+┌─────────────────┬──────────┬─────────────┬──────────────────────┐
+│ Package         │ Severity │ Version     │ Vulnerability ID     │
+├─────────────────┼──────────┼─────────────┼──────────────────────┤
+│ lodash          │ high     │ 4.17.20    │ SNYK-JS-LODASH-73886 │
+│ minimist        │ moderate │ 1.2.5      │ SNYK-JS-MINIMIST-242 │
+└─────────────────┴──────────┴─────────────┴──────────────────────┘
+
+Summary:
+  Critical: 0
+  High: 1
+  Moderate: 1
+  Low: 0
+  Total: 2
+```

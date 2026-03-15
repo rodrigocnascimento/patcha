@@ -22,6 +22,8 @@ export interface Vulnerability {
   url: string;
   fixable: boolean;
   fixVersion?: string;
+  cves?: string[];
+  dependencyPath?: string;
 }
 
 export interface ScanSummary {

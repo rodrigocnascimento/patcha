@@ -1,0 +1,153 @@
+---
+title: "CI/CD Integration"
+description: "Integrate Patcha into your continuous integration pipeline"
+---
+
+Patcha is designed to work seamlessly in CI/CD environments.
+
+## GitHub Actions
+
+### Basic Workflow
+
+```yaml
+name: Security Scan
+
+on: [push, pull_request]
+
+jobs:
+  patcha:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Scan vulnerabilities
+        run: npx patcha scan
+```
+
+### With Auto-fix
+
+```yaml
+name: Auto-fix Vulnerabilities
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Daily at midnight
+  workflow_dispatch:
+
+jobs:
+  patcha-fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Fix vulnerabilities
+        run: npx patcha fix --auto
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+```
+
+### With Merge Request
+
+```yaml
+- name: Fix and create MR
+  run: npx patcha fix --auto --mr
+  env:
+    ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+## GitLab CI
+
+```yaml
+stages:
+  - security
+
+patcha:
+  stage: security
+  image: node:20
+  script:
+    - npm ci
+    - npx patcha scan
+  only:
+    - main
+    - merge_requests
+```
+
+## CircleCI
+
+```yaml
+workflows:
+  version: 2
+  security:
+    jobs:
+      - patcha-scan:
+          context:
+            - patcha-api
+```
+
+## Best Practices
+
+### 1. Fail on Critical Vulnerabilities
+
+```bash
+patcha scan --level critical || exit 1
+```
+
+### 2. Use JSON Output for Reporting
+
+```bash
+patcha scan --json > vulnerability-report-${{ github.run_id }}.json
+```
+
+### 3. Schedule Regular Scans
+
+RunPatcha daily or weekly to catch new vulnerabilities quickly:
+
+```yaml
+on:
+  schedule:
+    - cron: '0 0 * * *'
+```
+
+## API Keys in CI
+
+Store API keys as secrets:
+
+- **GitHub**: Repository Settings → Secrets and variables
+- **GitLab**: CI/CD Settings → Variables
+- **CircleCI**: Project Settings → Contexts
+
+<Warning>
+Never commit API keys to your repository.
+</Warning>
+
+## Exit Codes
+
+| Code | Meaning |
+|------|---------|
+| 0 | No vulnerabilities found |
+| 1 | Vulnerabilities found |
+| 2 | Error occurred |
+
+Use exit codes to control pipeline behavior:
+
+```bash
+# Exit with code 1 if vulnerabilities found, but continue
+patcha scan || true
+```

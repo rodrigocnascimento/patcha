@@ -1,0 +1,123 @@
+---
+title: "LLM Providers"
+description: "Configure AI providers for advanced vulnerability resolution"
+---
+
+Patcha can use LLM providers to resolve complex vulnerabilities that can't be fixed automatically.
+
+## Supported Providers
+
+| Provider | Model | Setup Required |
+|----------|-------|----------------|
+| Anthropic | Claude | API key |
+| OpenAI | GPT-4 | API key |
+| Google | Gemini | API key |
+
+## Setup
+
+### 1. Install the package
+
+Patcha is installed with LLM support by default:
+
+```bash
+npm install -g patcha
+```
+
+### 2. Set the provider
+
+```bash
+patcha config set-provider anthropic
+```
+
+### 3. Configure API key
+
+**Using environment variable:**
+
+```bash
+patcha config set-api-key anthropic $ANTHROPIC_API_KEY
+```
+
+**Or using direct value:**
+
+```bash
+patcha config set-api-key anthropic sk-ant-api03-xxxxx
+```
+
+<Warning>
+Be careful when setting API keys directly. Use environment variables in CI/CD.
+</Warning>
+
+## Anthropic (Claude)
+
+```bash
+patcha config set-provider anthropic
+patcha config set-api-key anthropic $ANTHROPIC_API_KEY
+```
+
+Required environment variable: `ANTHROPIC_API_KEY`
+
+## OpenAI
+
+```bash
+patcha config set-provider openai
+patcha config set-api-key openai $OPENAI_API_KEY
+```
+
+Required environment variable: `OPENAI_API_KEY`
+
+## Google Gemini
+
+```bash
+patcha config set-provider google
+patcha config set-api-key google $GOOGLE_API_KEY
+```
+
+Required environment variable: `GOOGLE_API_KEY`
+
+## Using AI Fixes
+
+Once configured, use the `--ai` flag:
+
+```bash
+patcha fix --ai
+```
+
+This enables Level 3 (AI-assisted) resolution.
+
+## Disable AI Features
+
+```bash
+patcha config set-provider none
+```
+
+Or disable only Level 3:
+
+```bash
+patcha config auto-fix --no-level3
+```
+
+## Verify Configuration
+
+```bash
+patcha config list
+```
+
+Shows:
+- Current provider
+- Available providers
+- Auto-fix levels status
+
+## Cost Considerations
+
+- Level 1 and 2 are free (no API calls)
+- Level 3 uses API credits based on:
+  - Number of vulnerabilities
+  - Complexity of each case
+  - Model used
+
+<Note>
+Start with a dry run to estimate costs:
+```bash
+patcha fix --ai --dry-run
+```
+</Note>

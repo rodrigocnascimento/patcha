@@ -1,0 +1,84 @@
+---
+title: "Introduction"
+description: "Patch vulnerable dependencies instantly without waiting for upstream releases"
+---
+
+<h1 align="center">Patcha</h1>
+
+<p align="center">
+  Secure dependency patching for Node.js
+</p>
+
+---
+
+## The Problem
+
+Modern JavaScript projects rely on **hundreds of dependencies**. When a vulnerability appears, developers often have to:
+
+- Wait for maintainers to release a fix
+- Deal with nested dependency chains
+- Ship code with known vulnerabilities
+
+This delay can take **days or weeks**.
+
+## The Patcha Approach
+
+Patcha allows developers to **patch vulnerable dependencies immediately**. Instead of waiting for upstream fixes, Patcha safely injects targeted patches directly into your dependency tree.
+
+```
+Scan → Detect → Patch
+```
+
+<CardGroup cols={2}>
+
+<Card title="Scan" icon="magnifying-glass" href="/commands/scan">
+  Detect vulnerabilities in your dependency tree
+</Card>
+
+<Card title="Fix" icon="wrench" href="/commands/fix">
+  Apply automatic or AI-assisted fixes
+</Card>
+
+<Card title="Configure" icon="gear" href="/commands/config">
+  Customize behavior and LLM providers
+</Card>
+
+<Card title="CI/CD" icon="server" href="/guides/ci-cd">
+  Integrate into your pipelines
+</Card>
+
+</CardGroup>
+
+## Features
+
+| Feature | Description |
+|---------|-------------|
+| **Instant Patching** | Apply fixes without waiting for upstream releases |
+| **Multi-level Resolution** | From auto-fix to AI-assisted resolution |
+| **CI Friendly** | Works seamlessly in automated pipelines |
+| **Lockfile Support** | Works with npm, pnpm, and yarn |
+
+## Quick Example
+
+```bash
+# Scan for vulnerabilities
+patcha scan
+
+# Apply available fixes
+patcha fix
+
+# Create a merge request automatically
+patcha fix --mr
+```
+
+## Philosophy
+
+> Security patches should not depend on release cycles.
+
+When a vulnerability appears, developers should be able to respond **immediately and safely**.
+
+---
+
+<Card title="Get Started" icon="rocket" href="/quickstart" horizontal>
+  Follow the quickstart guide to patch your first vulnerability
+</Card>

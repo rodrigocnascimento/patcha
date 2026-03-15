@@ -1,0 +1,136 @@
+---
+title: "config"
+description: "Manage Patcha configuration"
+---
+
+The `config` command manages Patcha settings for your project.
+
+## Usage
+
+```bash
+patcha config <subcommand> [options]
+```
+
+## Subcommands
+
+### list
+
+Show current configuration.
+
+```bash
+patcha config list [path]
+```
+
+**Example output:**
+
+```
+📋 Current Configuration:
+
+  LLM Provider: anthropic
+  Auto-fix Level 1: enabled
+  Auto-fix Level 2: enabled
+  Auto-fix Level 3: disabled
+
+📦 Available LLM Providers:
+  - anthropic
+  - google
+  - openai
+  - none
+
+⚙️  Configuration file:
+  /project/.patcharc
+```
+
+### set-provider
+
+Set the LLM provider.
+
+```bash
+patcha config set-provider <provider> [path]
+```
+
+**Providers:**
+- `anthropic` - Anthropic Claude
+- `google` - Google Gemini
+- `openai` - OpenAI GPT
+- `none` - Disable AI features
+
+**Example:**
+
+```bash
+patcha config set-provider anthropic
+```
+
+### set-api-key
+
+Set API key for a provider.
+
+```bash
+patcha config set-api-key <provider> <apiKey> [path]
+```
+
+You can use environment variables:
+
+```bash
+patcha config set-api-key anthropic $ANTHROPIC_API_KEY
+```
+
+Or direct values (not recommended):
+
+```bash
+patcha config set-api-key openai sk-xxxxx
+```
+
+### auto-fix
+
+Configure auto-fix levels.
+
+```bash
+patcha config auto-fix [options] [path]
+```
+
+**Options:**
+
+| Option | Description |
+|--------|-------------|
+| `--level1` | Enable/disable level 1 auto-fix |
+| `--level2` | Enable/disable level 2 smart upgrade |
+| `--level3` | Enable/disable level 3 AI-assisted |
+
+**Examples:**
+
+```bash
+# Enable all levels
+patcha config auto-fix --level1 --level2 --level3
+
+# Disable AI-assisted
+patcha config auto-fix --no-level3
+```
+
+## Configuration File
+
+Patcha stores configuration in `.patcharc` in your project root:
+
+```json
+{
+  "llmProvider": "anthropic",
+  "apiKeys": {
+    "anthropic": "$ANTHROPIC_API_KEY"
+  },
+  "autoFix": {
+    "level1": true,
+    "level2": true,
+    "level3": false
+  }
+}
+```
+
+## Environment Variables
+
+You can also configure via environment variables:
+
+| Variable | Description |
+|----------|-------------|
+| `ANTHROPIC_API_KEY` | Anthropic Claude API key |
+| `OPENAI_API_KEY` | OpenAI API key |
+| `GOOGLE_API_KEY` | Google Gemini API key |

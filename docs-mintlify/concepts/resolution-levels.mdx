@@ -1,0 +1,82 @@
+---
+title: "Resolution Levels"
+description: "Understanding Patcha's three-level vulnerability resolution system"
+---
+
+Patcha uses a three-level system to resolve vulnerabilities, from automatic fixes to AI-assisted solutions.
+
+## Level 1: Auto-fix
+
+The simplest resolution method. Patcha updates the package to a version that:
+
+- Resolves the vulnerability
+- Maintains backward compatibility
+- Requires no code changes
+
+**When used**: When a direct version bump fixes the vulnerability.
+
+**Example**:
+```
+lodash: 4.17.20 → 4.17.21
+```
+
+## Level 2: Smart Upgrade
+
+When a direct update isn't available, Patcha analyzes the dependency tree to find the minimal upgrade that:
+
+- Resolves the vulnerability
+- Maintains compatibility with other dependencies
+- Has the fewest breaking changes
+
+**When used**: When the vulnerable version is no longer maintained but newer versions exist.
+
+**Example**:
+```
+minimist: 1.2.5 → 1.2.8 (skip 1.2.6 and 1.2.7)
+```
+
+## Level 3: AI-assisted
+
+For complex vulnerabilities, Patcha uses LLM providers to:
+
+- Analyze the vulnerability details
+- Research potential fixes
+- Generate custom patches
+
+**When used**: When no automatic fix is available.
+
+**Requirements**:
+- Configure an LLM provider
+- Set API key
+
+<Note>
+Level 3 requires an API key for OpenAI, Anthropic, or Google.
+</Note>
+
+## Resolution Summary
+
+When running `patcha fix`, you'll see a summary:
+
+```
+Resolution Summary:
+  ✓ Level 1 (Auto-fix): 5
+  ✓ Level 2 (Smart upgrade): 3
+  🤖 Level 3 (AI-assisted): 1
+  ✗ No fix available: 2
+
+Total resolved: 9 of 11
+```
+
+## Configuring Levels
+
+You can enable or disable each level:
+
+```bash
+# Disable auto-fix (level 1)
+patcha config auto-fix --no-level1
+
+# Enable AI-assisted (level 3)
+patcha config auto-fix --level3
+```
+
+See [config command](/commands/config) for more options.
