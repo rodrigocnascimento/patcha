@@ -7,7 +7,7 @@
       <div class="text-center">
         <img src="/patcha_panda_logo_name.png" alt="Patcha" class="h-[500px] mx-auto mb-6" />
         <p class="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-          Secure dependency patching for Node.js projects.
+          AI-powered dependency patching for Node.js. We try harder than npm audit fix.
         </p>
         
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">

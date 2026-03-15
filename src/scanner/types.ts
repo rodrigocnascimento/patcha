@@ -1,5 +1,18 @@
 export type Severity = 'low' | 'moderate' | 'high' | 'critical';
 
+export interface Advisory {
+  id: number;
+  url: string;
+  title: string;
+  severity: string;
+  vulnerable_versions: string;
+  cwe?: string[];
+  cvss?: {
+    score: number;
+    vectorString: string | null;
+  };
+}
+
 export interface Vulnerability {
   id: string;
   severity: Severity;
@@ -36,27 +49,23 @@ export interface ArboristNode {
 }
 
 export interface NpmAuditAdvisory {
-  id: number;
-  module_name: string;
+  name: string;
   severity: string;
-  url: string;
-  title: string;
-  finding_short?: string;
-  finding_long?: string;
-  fix_available?: {
+  isDirect?: boolean;
+  via: Array<any>;
+  effects: string[];
+  range: string;
+  nodes: string[];
+  fixAvailable: boolean | {
+    name: string;
     version: string;
-    pr: number;
-    committed?: string;
+    isSemVerMajor: boolean;
   };
-  patches?: Array<{
-    version: string;
-    patch: string;
-  }>;
 }
 
 export interface NpmAuditResponse {
   auditReportVersion: number;
-  vulnerabilities: Record<string, NpmAuditAdvisory>;
+  vulnerabilities: Record<string, NpmAuditAdvisory | Advisory[]>;
   metadata?: {
     vulnerabilities: Record<string, number>;
   };

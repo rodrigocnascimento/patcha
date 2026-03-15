@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0] - 2026-03-15
+
+### Fixed
+- Scanner not detecting vulnerabilities - changed API endpoint to bulk advisories
+- Fixed package-lock.json parsing for accurate dependency versions
+
+### Added
+- `--json` option for JSON output
+- `-l, --level` filter by severity (critical/high/moderate/low)
+- `-n, --number` to control displayed count (default: 25)
+- `-a, --all` to show all vulnerabilities
+
+### Changed
+- Improved landing page UI components
+- HowItWorks: numbered badges on cards
+- TerminalPreview: AI resolution levels display
+- CIIntegration: terminal window with syntax highlighting
+- Features: added 5 resolution levels section
+- Removed default path from CLI help
+
 ## [0.3.0] - 2026-03-14
 
 ### Added

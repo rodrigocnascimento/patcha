@@ -1,6 +1,6 @@
 {
   "name": "patcha",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "description": "CLI para scanning e remediation de vulnerabilidades em dependências npm",
   "main": "dist/index.js",
   "type": "module",
