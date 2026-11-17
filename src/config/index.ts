@@ -1,6 +1,10 @@
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { writeFileSync } from 'fs';
 import { resolve } from 'path';
+import { cosmiconfigSync } from 'cosmiconfig';
 import { PatchaConfigSchema, type PatchaConfig } from './types.js';
+
+const MODULE_NAME = 'patcha';
+const explorer = cosmiconfigSync(MODULE_NAME);
 
 const DEFAULT_CONFIG: PatchaConfig = {
   llmProvider: 'none',
@@ -12,27 +16,27 @@ const DEFAULT_CONFIG: PatchaConfig = {
 };
 
 export function getConfigPath(projectPath: string): string {
-  return resolve(projectPath, 'patcha.config.json');
+  const result = explorer.search(projectPath);
+  return result?.filepath || resolve(projectPath, 'patcha.config.json');
 }
 
 export function loadConfig(projectPath: string): PatchaConfig {
-  const configPath = getConfigPath(projectPath);
+  const result = explorer.search(projectPath);
   
-  if (!existsSync(configPath)) {
+  if (!result || result.isEmpty) {
     return DEFAULT_CONFIG;
   }
 
   try {
-    const content = readFileSync(configPath, 'utf-8');
-    const raw = JSON.parse(content);
-    return PatchaConfigSchema.parse(raw);
+    const parsed = PatchaConfigSchema.parse(result.config);
+    return { ...DEFAULT_CONFIG, ...parsed };
   } catch {
     return DEFAULT_CONFIG;
   }
 }
 
 export function saveConfig(projectPath: string, config: PatchaConfig): void {
-  const configPath = getConfigPath(projectPath);
+  const configPath = resolve(projectPath, 'patcha.config.json');
   const validated = PatchaConfigSchema.parse(config);
   writeFileSync(configPath, JSON.stringify(validated, null, 2));
 }
